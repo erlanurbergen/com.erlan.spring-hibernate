@@ -3,6 +3,7 @@ package com.erlan.spring.entity.controllers;
 import com.erlan.spring.entity.DAO.EmployeeDAO;
 import com.erlan.spring.entity.DAO.EmployeeDAOImplementation;
 import com.erlan.spring.entity.Employee;
+import com.erlan.spring.entity.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +15,12 @@ import java.util.List;
 public class MainController {
 
     @Autowired
-    private EmployeeDAO employeeDAO;
+    private EmployeeService employeeService;
 
     @RequestMapping("/")
     public String getAllEmployees(Model model) {
 
-        List<Employee> allEmployyees = employeeDAO.getAllEmployyees();
+        List<Employee> allEmployyees = employeeService.getAllEmployyees();
         model.addAttribute("allEmployees", allEmployyees);
         return "allEmployees";
     }
