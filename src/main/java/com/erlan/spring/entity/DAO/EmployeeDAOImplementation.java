@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 public class EmployeeDAOImplementation implements EmployeeDAO{
 
-
     @Autowired
     private SessionFactory sessionFactory;
 
@@ -23,5 +22,11 @@ public class EmployeeDAOImplementation implements EmployeeDAO{
         List<Employee> allEmployees = session.createQuery("from Employee", Employee.class).getResultList();
 
         return allEmployees;
+    }
+
+    @Override
+    public void saveEmployee(Employee employee) {
+        Session session = sessionFactory.getCurrentSession();
+        session.save(employee);
     }
 }
