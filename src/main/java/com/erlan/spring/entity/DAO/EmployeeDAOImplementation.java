@@ -1,6 +1,7 @@
 package com.erlan.spring.entity.DAO;
 
 import com.erlan.spring.entity.Employee;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,16 @@ public class EmployeeDAOImplementation implements EmployeeDAO{
         Employee employee = session.get(Employee.class, id);
 
         return employee;
+    }
+
+    @Override
+    public void deleteEmployee(int id) {
+        Session session = sessionFactory.getCurrentSession();
+        Employee employee = session.get(Employee.class, id);
+        Query<Employee> employeeQuery = session
+                .createQuery("delete from Employee where id = :employeeId");
+        employeeQuery.setParameter("employeeId", id);
+        employeeQuery.executeUpdate();
+
     }
 }
